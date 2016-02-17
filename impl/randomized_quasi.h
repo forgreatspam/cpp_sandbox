@@ -150,13 +150,14 @@ namespace rnd
   };
 
   template <class RandomFunc>
-  class RandomGenerator<RandomFunc, std::enable_if_t<AnyImplements<RandomizedHalton, RandomFunc>::value>>
+  struct RandomGenerator<RandomFunc, std::enable_if_t<
+    AnyImplements<RandomizedHalton, RandomFunc>::value
+      || AnyImplements<RandomizedSobol, RandomFunc>::value>>
     : public RandomGeneratorQuasi<RandomFunc>
-  {};
-
-
-  template <class RandomFunc>
-  class RandomGenerator<RandomFunc, std::enable_if_t<AnyImplements<RandomizedSobol, RandomFunc>::value>>
-    : public RandomGeneratorQuasi<RandomFunc>
-  {};
+  {
+    template <class... Args>
+    RandomGenerator(Args && ... args)
+      : RandomGeneratorQuasi<RandomFunc>(std::forward<Args>(args)...)
+    {}
+  };
 }

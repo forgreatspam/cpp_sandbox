@@ -2,6 +2,7 @@
 // Notice, boost has random numbers generator implementation, but it is
 // not thread safe. They recommend to use mutexes which will work, but will cause
 // significant performance loss in our case
+#include "util/traits.h"
 
 
 namespace rnd
@@ -10,25 +11,8 @@ namespace rnd
   class RandomGenerator;  // To be specialized for each kind of random function
 
 
-  namespace detail
-  {
-    // The following class provides Create method which is used in order to avoid explicit
-    // redefinition of constructor in derived classes
-    template <class Parent>
-    struct CreateFuncImpl  // TODO: remove it or move to util
-    {
-      template <class... Args>
-      static Parent Create(Args && ... args)
-      {
-        return Parent(std::forward<Args>(args)...);
-      }
-    };
-  }
-
-
   template <class RandomFunc>
   class RandomGeneratorPseudo
-    : public detail::CreateFuncImpl<RandomGeneratorPseudo<RandomFunc>>
   {
   public:
     RandomGeneratorPseudo(RandomFunc const & rndImpl)
@@ -54,7 +38,7 @@ namespace rnd
 
 
   template <class RandomFunc>
-  class RandomGeneratorQuasi : public detail::CreateFuncImpl<RandomGeneratorQuasi<RandomFunc>>
+  class RandomGeneratorQuasi
   {
   public:
     RandomGeneratorQuasi(RandomFunc const & rndImpl)
@@ -93,6 +77,6 @@ namespace rnd
   template <class RandomFunc>
   decltype(auto) CreateGenerator(RandomFunc && randomFunc)
   {
-    return RandomGenerator<RandomFunc>::Create(std::forward<RandomFunc>(randomFunc));
+    return RandomGenerator<util::BaseType<RandomFunc>>(std::forward<RandomFunc>(randomFunc));
   }
 }
