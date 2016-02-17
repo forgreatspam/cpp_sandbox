@@ -91,6 +91,9 @@
     <ClInclude Include="settings\settings.h">
       <Filter>Source Files\settings</Filter>
     </ClInclude>
+    <ClInclude Include="impl\make_experiments.h">
+      <Filter>Source Files\impl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linear_monte_carlo.cpp">

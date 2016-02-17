@@ -87,6 +87,7 @@
     <ClInclude Include="impl\declare_random_generator.h" />
     <ClInclude Include="impl\estimate.h" />
     <ClInclude Include="impl\halton.h" />
+    <ClInclude Include="impl\make_experiments.h" />
     <ClInclude Include="impl\method.h" />
     <ClInclude Include="impl\neumann_solver.h" />
     <ClInclude Include="impl\printers.h" />
