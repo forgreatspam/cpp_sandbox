@@ -8,8 +8,8 @@
 #include <boost/fusion/include/as_list.hpp>
 #include <boost/mpl/for_each.hpp>
 
-#include "settings.h"
-#include "equation.h"
+#include "settings/settings.h"
+#include "settings/equation.h"
 #include "impl/printers.h"
 #include "impl/calculators.h"
 #include "util/timer.h"

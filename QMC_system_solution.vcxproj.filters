@@ -11,6 +11,9 @@
     <Filter Include="Source Files\impl">
       <UniqueIdentifier>{871b7d1e-6b33-483b-949e-18f1e0e687fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\settings">
+      <UniqueIdentifier>{7f8b2d3d-b766-4c82-b577-2a2f1c9e68d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="result.txt" />
@@ -19,9 +22,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="settings.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="util\create_instance.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
@@ -33,9 +33,6 @@
     </ClInclude>
     <ClInclude Include="util\zip.h">
       <Filter>Source Files\util</Filter>
-    </ClInclude>
-    <ClInclude Include="equation.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators.h">
       <Filter>Source Files\impl</Filter>
@@ -87,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="util\spinlock.h">
       <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\equation.h">
+      <Filter>Source Files\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\settings.h">
+      <Filter>Source Files\settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

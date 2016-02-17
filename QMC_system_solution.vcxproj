@@ -82,7 +82,6 @@
     <Text Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="equation.h" />
     <ClInclude Include="impl\calculators.h" />
     <ClInclude Include="impl\calculators_fwd.h" />
     <ClInclude Include="impl\declare_random_generator.h" />
@@ -97,7 +96,8 @@
     <ClInclude Include="impl\thread_mode.h" />
     <ClInclude Include="impl\types.h" />
     <ClInclude Include="impl\uniform_random.h" />
-    <ClInclude Include="settings.h" />
+    <ClInclude Include="settings\equation.h" />
+    <ClInclude Include="settings\settings.h" />
     <ClInclude Include="util\create_instance.h" />
     <ClInclude Include="util\range.h" />
     <ClInclude Include="util\spinlock.h" />

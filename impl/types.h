@@ -3,7 +3,7 @@
 #include <numeric>
 #include <vector>
 
-#include "settings.h"
+#include "settings/settings.h"
 #include "util/range.h"
 #include "util/zip.h"
 
