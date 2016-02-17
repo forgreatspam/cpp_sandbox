@@ -1,0 +1,9 @@
+result.txt
+*.exe
+*.pdb
+*.obj
+*.pch
+*.tlog
+*.log
+*.idb
+*.enc

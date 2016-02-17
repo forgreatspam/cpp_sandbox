@@ -1,0 +1,11 @@
+* use static analyzer
+* use automated documentation
+* check hana
+* compile with x64
+* use variable templates?, they are supported by GCC but not MSVC 2015
+* use cmake, test agains gcc/clang, compile for JS (c++17 might be a problem)
+* use ublas
+* use noncopyable classes, currently it is impossible because of boost::fusion::transform
+* make thread pool based implementation
+* rename solution
+* separate output logic from the core algorithms
