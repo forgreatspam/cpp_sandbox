@@ -12,7 +12,7 @@
 #include "settings/settings.h"
 #include "settings/equation.h"
 #include "impl/printers.h"
-#include "impl/calculators.h"
+#include "impl/calculators/calculators.h"
 #include "util/timer.h"
 
 

@@ -14,6 +14,9 @@
     <Filter Include="Source Files\settings">
       <UniqueIdentifier>{7f8b2d3d-b766-4c82-b577-2a2f1c9e68d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\impl\Calculators">
+      <UniqueIdentifier>{3ea0e915-4ec8-459d-96ec-7eb299a88db7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="result.txt" />
@@ -33,9 +36,6 @@
     </ClInclude>
     <ClInclude Include="util\zip.h">
       <Filter>Source Files\util</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\calculators.h">
-      <Filter>Source Files\impl</Filter>
     </ClInclude>
     <ClInclude Include="impl\declare_random_generator.h">
       <Filter>Source Files\impl</Filter>
@@ -79,9 +79,6 @@
     <ClInclude Include="util\traits.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="impl\calculators_fwd.h">
-      <Filter>Source Files\impl</Filter>
-    </ClInclude>
     <ClInclude Include="util\spinlock.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
@@ -93,6 +90,12 @@
     </ClInclude>
     <ClInclude Include="impl\make_experiments.h">
       <Filter>Source Files\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\calculators\calculators.h">
+      <Filter>Source Files\impl\Calculators</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\calculators\calculators_fwd.h">
+      <Filter>Source Files\impl\Calculators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
