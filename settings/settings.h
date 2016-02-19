@@ -24,7 +24,7 @@ namespace settings
 
   size_t const DIMENSION = 20;
   size_t const MIN_REPEAT = 10;
-  size_t const MAX_REPEAT = 25000;
+  size_t const MAX_REPEAT = 25'000;
 
   char const * LOG_FILE_NAME = "result.txt";
 
@@ -32,23 +32,26 @@ namespace settings
   template <template <class> class T>
   using TemplateIdentity = mpl::identity<T<mpl::_1>>;
 
+
   using Calculators = mpl::list<
     TemplateIdentity<rnd::CalculatorSingleThreaded>,
     TemplateIdentity<rnd::CalculatorForked>
   >::type;
+
 
   decltype(auto) GetMethods()
   {
     using namespace boost::fusion;
 
     return make_list(
-        rnd::CreateMethod<rnd::UniformRandom>("Pseudo", 36543)
-      , rnd::CreateMethod<rnd::Halton>("Halton", 10000)
+        rnd::CreateMethod<rnd::UniformRandom>("Pseudo", 36'543)
+      , rnd::CreateMethod<rnd::Halton>("Halton", 10'000)
       , rnd::CreateMethod<rnd::Sobol>("Sobol")
-      , rnd::CreateMethod<rnd::RandomizedHalton<2>>("RndHalton", 10000)
+      , rnd::CreateMethod<rnd::RandomizedHalton<2>>("RndHalton", 10'000)
       , rnd::CreateMethod<rnd::RandomizedSobol<2>>("RndSobol")
       );
   }
+
 
   std::ostream & GetStream()
   {
