@@ -11,8 +11,9 @@
 
 #include "settings/settings.h"
 #include "settings/equation.h"
-#include "impl/printers.h"
-#include "impl/calculators/calculators.h"
+#include "calculators/single.h"
+#include "calculators/forked.h"
+#include "printers.h"
 #include "util/timer.h"
 
 

@@ -82,8 +82,10 @@
     <Text Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="impl\calculators\calculators.h" />
     <ClInclude Include="impl\calculators\calculators_fwd.h" />
+    <ClInclude Include="impl\calculators\common.h" />
+    <ClInclude Include="impl\calculators\forked.h" />
+    <ClInclude Include="impl\calculators\single.h" />
     <ClInclude Include="impl\declare_random_generator.h" />
     <ClInclude Include="impl\estimate.h" />
     <ClInclude Include="impl\halton.h" />

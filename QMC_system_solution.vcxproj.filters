@@ -91,10 +91,16 @@
     <ClInclude Include="impl\make_experiments.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
-    <ClInclude Include="impl\calculators\calculators.h">
+    <ClInclude Include="impl\calculators\calculators_fwd.h">
       <Filter>Source Files\impl\Calculators</Filter>
     </ClInclude>
-    <ClInclude Include="impl\calculators\calculators_fwd.h">
+    <ClInclude Include="impl\calculators\common.h">
+      <Filter>Source Files\impl\Calculators</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\calculators\forked.h">
+      <Filter>Source Files\impl\Calculators</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\calculators\single.h">
       <Filter>Source Files\impl\Calculators</Filter>
     </ClInclude>
   </ItemGroup>
