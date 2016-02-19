@@ -72,8 +72,6 @@ namespace rnd
       auto methods = settings::GetMethods();
       std::ostream & stream = settings::GetStream();
 
-      stream << ".";
-
       util::Timer timer;
 
       MakeExperimentsImpl<CalculatorIdentity>(
