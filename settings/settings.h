@@ -5,8 +5,6 @@
 #include <boost/fusion/container/list.hpp>
 #include <boost/fusion/include/make_list.hpp>
 #include <boost/mpl/list.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/identity.hpp>
 
 #include "impl/halton.h"
 #include "impl/sobol.h"
@@ -29,13 +27,9 @@ namespace settings
   char const * LOG_FILE_NAME = "result.txt";
 
 
-  template <template <class> class T>
-  using TemplateIdentity = mpl::identity<T<mpl::_1>>;
-
-
   using Calculators = mpl::list<
-    TemplateIdentity<rnd::CalculatorSingleThreaded>,
-    TemplateIdentity<rnd::CalculatorForked>
+    rnd::CalculatorSingleThreadedId,
+    rnd::CalculatorForkedId
   >::type;
 
 

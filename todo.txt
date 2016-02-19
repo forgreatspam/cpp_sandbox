@@ -9,3 +9,4 @@
 * make thread pool based implementation
 * rename solution
 * separate output logic from the core algorithms
+* use profiler, check https://blogs.msdn.microsoft.com/visualstudioalm/2015/10/29/profile-your-cpu-in-the-debugger-in-visual-studio-2015/ for example

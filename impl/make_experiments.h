@@ -33,6 +33,8 @@ namespace rnd
   void MakeExperimentsImpl(linear::Equation const & equation, Methods methods, size_t minRepeat, size_t maxRepeat,
     std::ostream & stream = std::cout)
   {
+    stream << "Calculator type: " << CalculatorName<CalculatorIdentity>::Get() << std::endl;
+
     stream << "Repeat ";
     bf::for_each(methods, [&stream](auto const & method) { stream << method << " "; });
     stream << std::endl;

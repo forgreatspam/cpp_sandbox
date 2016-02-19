@@ -3,7 +3,9 @@
 #include <future>
 #include <vector>
 #include <iostream>
+#include <string>
 
+#include "calculators_fwd.h"
 #include "printers.h"
 #include "types.h"
 #include "estimate.h"
@@ -71,6 +73,16 @@ namespace rnd
   };
 
 
+  template <>
+  struct CalculatorName<CalculatorSingleThreadedId>
+  {
+    static std::string Get()
+    {
+      return "single threaded";
+    }
+  };
+
+
   template <class Method>
   class CalculatorForked : public CalculatorBase<Method>
   {
@@ -118,6 +130,16 @@ namespace rnd
     unsigned const maxThreadCount_;
     using RandomGenerator = typename Method::template InstanceType<thread_mode::Forkable>;
     std::vector<RandomGenerator> randomGenerators_;
+  };
+
+
+  template <>
+  struct CalculatorName<CalculatorForkedId>
+  {
+    static std::string Get()
+    {
+      return "forked";
+    }
   };
 
 
