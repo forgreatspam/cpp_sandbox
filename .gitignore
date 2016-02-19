@@ -7,3 +7,10 @@ result.txt
 *.log
 *.idb
 *.enc
+*.suo
+*.ilk
+*.opendb
+*.sdf
+*.sln
+*.iobj
+*.ipdb
