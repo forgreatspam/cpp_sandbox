@@ -29,6 +29,7 @@ namespace thread_mode
   using GetThreadMode = typename mpl::at<ThreadModes<Algorithm>, Mode>::type;
 
 
+  // TODO: move to utils
   template <class T>
   class ThreadedFromSingle
   {
@@ -112,9 +113,9 @@ namespace thread_mode
 
 
   template <class Map>
-  using Values = typename mpl::transform<Map, mpl::second<mpl::_1>, VectorInserter>::type;
+  using Values_ = typename mpl::transform<Map, mpl::second<mpl::_1>, VectorInserter>::type;
 
 
   template <class Algorithm, class Impl>
-  using Implements = typename mpl::contains<Values<thread_mode::ThreadModes<Algorithm>>, Impl>::type;
+  using Implements = typename mpl::contains<Values_<thread_mode::ThreadModes<Algorithm>>, Impl>::type;
 }

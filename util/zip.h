@@ -11,6 +11,7 @@ namespace util
 {
   namespace detail
   {
+    // TODO: boost hana's tuple provides similar functionality
     // Tuple must contain similartypes
     template <class Tuple>
     struct TupleHelper : Tuple
