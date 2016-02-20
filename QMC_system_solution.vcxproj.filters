@@ -14,7 +14,10 @@
     <Filter Include="Source Files\settings">
       <UniqueIdentifier>{7f8b2d3d-b766-4c82-b577-2a2f1c9e68d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\impl\Calculators">
+    <Filter Include="Source Files\impl\random">
+      <UniqueIdentifier>{b0669399-fcff-45d7-941e-4077c1239faa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\impl\calculators">
       <UniqueIdentifier>{3ea0e915-4ec8-459d-96ec-7eb299a88db7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -43,9 +46,6 @@
     <ClInclude Include="impl\estimate.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
-    <ClInclude Include="impl\halton.h">
-      <Filter>Source Files\impl</Filter>
-    </ClInclude>
     <ClInclude Include="impl\method.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
@@ -55,22 +55,13 @@
     <ClInclude Include="impl\printers.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
-    <ClInclude Include="impl\randomized_quasi.h">
-      <Filter>Source Files\impl</Filter>
-    </ClInclude>
     <ClInclude Include="impl\rnd_base.h">
-      <Filter>Source Files\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\sobol.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
     <ClInclude Include="impl\thread_mode.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
     <ClInclude Include="impl\types.h">
-      <Filter>Source Files\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\uniform_random.h">
       <Filter>Source Files\impl</Filter>
     </ClInclude>
     <ClInclude Include="util\range.h">
@@ -92,25 +83,37 @@
       <Filter>Source Files\impl</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\calculators_fwd.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\common.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\forked.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\single.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\forked_thread_pool.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
     </ClInclude>
     <ClInclude Include="util\thread_pool.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
     <ClInclude Include="impl\calculators\forked_common.h">
-      <Filter>Source Files\impl\Calculators</Filter>
+      <Filter>Source Files\impl\calculators</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\random\halton.h">
+      <Filter>Source Files\impl\random</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\random\randomized_quasi.h">
+      <Filter>Source Files\impl\random</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\random\sobol.h">
+      <Filter>Source Files\impl\random</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\random\uniform_random.h">
+      <Filter>Source Files\impl\random</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

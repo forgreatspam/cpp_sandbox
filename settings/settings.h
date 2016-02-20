@@ -6,12 +6,12 @@
 #include <boost/fusion/include/make_list.hpp>
 #include <boost/mpl/list.hpp>
 
-#include "impl/halton.h"
-#include "impl/sobol.h"
+#include "impl/random/halton.h"
+#include "impl/random/sobol.h"
+#include "impl/random/uniform_random.h"
+#include "impl/random/randomized_quasi.h"
 #include "impl/rnd_base.h"
 #include "impl/method.h"
-#include "impl/uniform_random.h"
-#include "impl/randomized_quasi.h"
 #include "impl/calculators/calculators_fwd.h"
 #include "util/stream_utils.h"
 

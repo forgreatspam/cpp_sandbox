@@ -14,9 +14,9 @@
 #include <string>
 #include <array>
 
-#include "rnd_base.h"
-#include "thread_mode.h"
-#include "declare_random_generator.h"
+#include "impl/rnd_base.h"
+#include "impl/thread_mode.h"
+#include "impl/declare_random_generator.h"
 #include "uniform_random.h"
 
 namespace rnd {

@@ -9,10 +9,10 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/count_if.hpp>
 
-#include "thread_mode.h"
-#include "uniform_random.h"
-#include "halton.h"
-#include "sobol.h"
+#include "impl/thread_mode.h"
+#include "./uniform_random.h"
+#include "./halton.h"
+#include "./sobol.h"
 #include "util/traits.h"
 
 // Notice, there is no scientific reason to use these 'methods', but they provided quite
