@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "./calculators_fwd.h"
-#include "./common.h"
+#include "./forked_common.h"
 #include "impl/types.h"
 #include "impl/estimate.h"
 #include "impl/neumann_solver.h"
@@ -15,29 +15,19 @@
 
 namespace rnd
 {
-  // TODO: detect overhead which makes this calculator slower than async-based version
   template <class Method>
-  class CalculatorThreadPool : public CalculatorBase<Method>
+  class CalculatorThreadPool : public ForkedCommon<Method>
   {
   public:
-    static int const MIN_CHUNK_PER_THREAD = 5000;
-
     // TODO: eliminate copy/paste
     CalculatorThreadPool(linear::Equation const & equation, Method method)
-      : CalculatorBase<Method>(equation, std::move(method))
-      , maxThreadCount_(std::max<int>(std::thread::hardware_concurrency(), 1))
+      : ForkedCommon<Method>(equation, std::move(method))
       , threadPool_(std::make_shared<util::ThreadPool>(maxThreadCount_ - 1))
-    {
-      randomGenerators_.reserve(maxThreadCount_);
-      auto randomGenerator = method_.CreateInstance<thread_mode::Forkable>();
-      for (auto ii : util::range(maxThreadCount_ - 1))
-        randomGenerators_.emplace_back(randomGenerator.GetFork());
-      randomGenerators_.emplace_back(std::move(randomGenerator));
-    }
+    {}
 
     void Update(size_t curRepeat)
     {
-      size_t const threadCount = std::max(1u, std::min(maxThreadCount_, curRepeat / MIN_CHUNK_PER_THREAD));
+      size_t const threadCount = GetThreadCount(curRepeat);
 
       typedef std::future<Estimate> EstimateFuture;
       std::vector<EstimateFuture> futures;
@@ -65,20 +55,11 @@ namespace rnd
       size_t const restRepeatCount = curRepeat - chunkSize * (threadCount - 1);
       task(std::ref(randomGenerators_[threadCount - 1]), std::ref(equation_), restRepeatCount);
 
-      for (auto & future : futures)
-      {
-        auto const & newEstimate = future.get();
-
-        estimate_.sum += newEstimate.sum;
-        estimate_.sumSq += newEstimate.sumSq;
-      }
+      UpdateEstimate(std::move(futures));
       repeat_ += curRepeat;
     }
 
   private:
-    unsigned const maxThreadCount_;
-    using RandomGenerator = typename Method::template InstanceType<thread_mode::Forkable>;
-    std::vector<RandomGenerator> randomGenerators_;
     // TODO: allow calculators to be move-only, currently I have to use shared_ptr
     std::shared_ptr<util::ThreadPool> threadPool_;
   };

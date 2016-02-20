@@ -109,6 +109,9 @@
     <ClInclude Include="util\thread_pool.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="impl\calculators\forked_common.h">
+      <Filter>Source Files\impl\Calculators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linear_monte_carlo.cpp">

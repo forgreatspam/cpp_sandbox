@@ -82,6 +82,7 @@
     <Text Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="impl\calculators\forked_common.h" />
     <ClInclude Include="impl\calculators\forked_thread_pool.h" />
     <ClInclude Include="impl\calculators\calculators_fwd.h" />
     <ClInclude Include="impl\calculators\common.h" />
