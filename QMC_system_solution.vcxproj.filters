@@ -103,6 +103,12 @@
     <ClInclude Include="impl\calculators\single.h">
       <Filter>Source Files\impl\Calculators</Filter>
     </ClInclude>
+    <ClInclude Include="impl\calculators\forked_thread_pool.h">
+      <Filter>Source Files\impl\Calculators</Filter>
+    </ClInclude>
+    <ClInclude Include="util\thread_pool.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linear_monte_carlo.cpp">

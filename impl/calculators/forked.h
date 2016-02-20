@@ -6,9 +6,9 @@
 
 #include "./calculators_fwd.h"
 #include "./common.h"
-#include "types.h"
-#include "estimate.h"
-#include "neumann_solver.h"
+#include "impl/types.h"
+#include "impl/estimate.h"
+#include "impl/neumann_solver.h"
 #include "util/range.h"
 
 
@@ -18,7 +18,7 @@ namespace rnd
   class CalculatorForked : public CalculatorBase<Method>
   {
   public:
-    static int const MIN_CHUNK_PER_THREAD = 10000;
+    static int const MIN_CHUNK_PER_THREAD = 5000;
 
     CalculatorForked(linear::Equation const & equation, Method method)
       : CalculatorBase<Method>(equation, std::move(method))
@@ -40,12 +40,12 @@ namespace rnd
 
       size_t const chunkSize = curRepeat / threadCount;
 
+      futures.emplace_back(std::async(std::launch::deferred, &rnd::GetEstimate<RandomGenerator>,
+        std::ref(randomGenerators_[threadCount - 1]), std::ref(equation_), curRepeat - chunkSize * (threadCount - 1)));
+
       for (auto ii : util::range(threadCount - 1))
         futures.emplace_back(std::async(std::launch::async, &rnd::GetEstimate<RandomGenerator>,
           std::ref(randomGenerators_[ii]), std::ref(equation_), chunkSize));
-
-      futures.emplace_back(std::async(std::launch::deferred, &rnd::GetEstimate<RandomGenerator>,
-        std::ref(randomGenerators_[threadCount - 1]), std::ref(equation_), curRepeat - chunkSize * (threadCount - 1)));
 
       for (auto & future : futures)
       {
@@ -69,7 +69,7 @@ namespace rnd
   {
     static std::string Get()
     {
-      return "forked";
+      return "forked using std::async";
     }
   };
 }

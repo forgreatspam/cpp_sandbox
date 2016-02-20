@@ -82,6 +82,7 @@
     <Text Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="impl\calculators\forked_thread_pool.h" />
     <ClInclude Include="impl\calculators\calculators_fwd.h" />
     <ClInclude Include="impl\calculators\common.h" />
     <ClInclude Include="impl\calculators\forked.h" />
@@ -105,6 +106,7 @@
     <ClInclude Include="util\range.h" />
     <ClInclude Include="util\spinlock.h" />
     <ClInclude Include="util\stream_utils.h" />
+    <ClInclude Include="util\thread_pool.h" />
     <ClInclude Include="util\timer.h" />
     <ClInclude Include="util\traits.h" />
     <ClInclude Include="util\zip.h" />

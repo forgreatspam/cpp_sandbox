@@ -13,6 +13,7 @@
 #include "settings/equation.h"
 #include "calculators/single.h"
 #include "calculators/forked.h"
+#include "calculators/forked_thread_pool.h"
 #include "printers.h"
 #include "util/timer.h"
 
@@ -42,9 +43,9 @@ namespace rnd
 
     auto calculators = bf::as_list(bf::transform(methods,
       [&equation](auto method)
-    {
-      return CreateCalculator<CalculatorIdentity>(equation, std::move(method));
-    }));
+      {
+        return CreateCalculator<CalculatorIdentity>(equation, std::move(method));
+      }));
 
     for (size_t repeat = minRepeat; repeat <= maxRepeat; repeat *= 2)
     {
@@ -80,7 +81,7 @@ namespace rnd
       MakeExperimentsImpl<CalculatorIdentity>(
         equation_, methods, settings::MIN_REPEAT, settings::MAX_REPEAT, stream);
 
-      std::cout << timer.GetTime() << "ms" << std::endl;
+      stream << timer.GetTime() << "ms" << std::endl << std::endl;
     }
 
   private:
