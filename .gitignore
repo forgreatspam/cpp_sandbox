@@ -7,3 +7,7 @@ ipch
 *.sln
 *.sdf
 *.opendb
+*.cmd
+*.exe
+*.user
+build
