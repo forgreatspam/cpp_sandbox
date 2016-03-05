@@ -23,14 +23,6 @@ namespace mpl = boost::mpl;
 
 namespace rnd
 {
-  template <class CalculatorIdentity, class Method>
-  decltype(auto) CreateCalculator(linear::Equation const & equation, Method method)
-  {
-    // I cannot move this code into lambda body because it makes MSVC compiler crash
-    using Calculator = typename mpl::apply<typename CalculatorIdentity::type, Method>::type;
-    return Calculator(equation, method);
-  }
-
   template <class CalculatorIdentity, class Methods>
   void MakeExperimentsImpl(linear::Equation const & equation, Methods methods, size_t minRepeat, size_t maxRepeat,
     std::ostream & stream = std::cout)
@@ -44,7 +36,9 @@ namespace rnd
     auto calculators = bf::as_list(bf::transform(methods,
       [&equation](auto method)
       {
-        return CreateCalculator<CalculatorIdentity>(equation, std::move(method));
+        using MethodType = decltype(method);
+        using Calculator = typename mpl::apply<typename CalculatorIdentity::type, MethodType>::type;
+        return Calculator(equation, method);
       }));
 
     for (size_t repeat = minRepeat; repeat <= maxRepeat; repeat *= 2)
