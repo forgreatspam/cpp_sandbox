@@ -5,6 +5,7 @@
 #include "types.h"
 #include "estimate.h"
 #include "util/range.h"
+#include "util/unused.h"
 
 
 namespace rnd { namespace
@@ -15,14 +16,11 @@ namespace rnd { namespace
   {
     double const continueProbability = 0.95;
 
-    double sumValues = 0;
-    double sumSquares = 0;
-
     // Notice, that loops order is essential for quasi-random numbers
     // The estimate parameters are not optimal and do not even tend to be optimal
     for (auto jj: util::range(linear::Equation::dimension))
     {
-      for (auto ii: util::range(repeat))
+      for (auto _ UNUSED: util::range(repeat))
       {
         double estimateInPoint = 1;
         size_t pos = jj;
@@ -51,7 +49,7 @@ namespace rnd { namespace
 
 
   template <class RandomGenerator>
-  Estimate GetEstimate(RandomGenerator & randomGenerator, linear::Equation const & equation, size_t const repeat)
+  Estimate GetEstimate(RandomGenerator & randomGenerator, linear::Equation const & equation, size_t repeat)
   {
     Estimate estimate;
     MakeEstimate(randomGenerator, equation, repeat, estimate);

@@ -2,6 +2,7 @@
 * use automated documentation
 * check hana
 * use variable templates?, they are supported by GCC but not MSVC 2015
+* try cmake, at least to compare with meson build
 * test agains gcc/clang, compile for JS (c++17 might be a problem)
 * use ublas
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform

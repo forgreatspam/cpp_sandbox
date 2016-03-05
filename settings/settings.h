@@ -28,9 +28,9 @@ namespace settings
 
 
   using Calculators = mpl::list<
-    rnd::CalculatorSingleThreadedId,
-    rnd::CalculatorForkedId,
-    rnd::CalculatorThreadPoolId
+      rnd::CalculatorSingleThreadedId
+    , rnd::CalculatorForkedId
+    , rnd::CalculatorThreadPoolId
   >::type;
 
 

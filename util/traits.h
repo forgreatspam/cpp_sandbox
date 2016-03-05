@@ -4,7 +4,7 @@
 namespace util
 {
     template<typename T>
-    using BaseType = std::remove_cv_t<std::remove_reference_t<T>>;
+    using BaseType = std::decay_t<T>;
 
     template <class T, class Arg, class... Args>
     struct IsCopyCtorArg

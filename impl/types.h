@@ -3,6 +3,8 @@
 #include <numeric>
 #include <vector>
 
+#include <boost/tuple/tuple.hpp>
+
 #include "settings/settings.h"
 #include "util/range.h"
 #include "util/zip.h"
@@ -27,8 +29,9 @@ namespace linear
 
     ResizedVector & operator+=(ResizedVector const & add)
     {
-      for (auto & x : util::zip(*this, add))
-        x[0] += x[1];
+      using namespace boost;
+      for (auto x : util::zip(*this, add))
+        get<0>(x) += get<1>(x);
       return *this;
     }
   };

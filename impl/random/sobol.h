@@ -208,14 +208,14 @@ namespace rnd {
       long long int i;
       bool includ[LOG_MAX];
       static bool initialized = false;
-      long long int j;
-      long long int j2;
-      long long int k;
-      long long int l;
-      static long long int lastq[DIM_MAX2];
-      long long int m;
-      static long long int maxcol;
-      long long int newv;
+      long long int j = 0;
+      long long int j2 = 0;
+      long long int k = 0;
+      long long int l = 0;
+      static long long int lastq[DIM_MAX2] = {};
+      long long int m = 0;
+      static long long int maxcol = 0;
+      long long int newv = 0;
       static long long int poly[DIM_MAX2] =
       {
         1, 3, 7, 11, 13, 19, 25, 37, 59, 47,

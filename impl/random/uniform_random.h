@@ -129,9 +129,9 @@ namespace rnd
 
   private:
     UniformRandomForkable(std::shared_ptr<AtomicValueType> srcShared)
-      : sharedVal_{ std::move(srcShared) }
-      , counter_{ 0 }
+      : counter_{ 0 }
       , localVal_{ 0 }
+      , sharedVal_{ std::move(srcShared) }
     {}
 
     void ReserveSequence_()

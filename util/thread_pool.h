@@ -4,6 +4,8 @@
 #include <thread>
 #include <vector>
 
+#include "unused.h"
+
 
 namespace util
 {
@@ -15,7 +17,7 @@ namespace util
     ThreadPool(size_t threadCount)
     {
       threads_.reserve(threadCount);
-      for (auto ii : util::range(threadCount))
+      for (auto _ UNUSED : util::range(threadCount))
         threads_.emplace_back(std::thread([this]() { RunWorker_(); }));
     }
 

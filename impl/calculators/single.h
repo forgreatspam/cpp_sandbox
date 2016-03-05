@@ -13,16 +13,17 @@ namespace rnd
   template <class Method>
   class CalculatorSingleThreaded : public CalculatorBase<Method>
   {
+    using Base = CalculatorBase<Method>;
   public:
     CalculatorSingleThreaded(linear::Equation const & equation, Method method)
       : CalculatorBase<Method>(equation, std::move(method))
-      , randomGenerator_(method.CreateInstance<thread_mode::SingleThreaded>())
+      , randomGenerator_(method.template CreateInstance<thread_mode::SingleThreaded>())
     {}
 
     void Update(size_t curRepeat)
     {
-      MakeEstimate(randomGenerator_, equation_, curRepeat, estimate_);
-      repeat_ += curRepeat;
+      MakeEstimate(randomGenerator_, Base::equation_, curRepeat, Base::estimate_);
+      Base::repeat_ += curRepeat;
     }
 
   private:

@@ -84,7 +84,7 @@ namespace thread_mode
 {
   template <class SingleImpl,
             class ThreadedImpl = ThreadedFromSingle<SingleImpl>,
-            class ForkedImpl = ForkedFromSingleThreaded<SingleImpl>>
+            class ForkedImpl = ForkedFromSingle<SingleImpl>>
   using ThreadModeHelper = mpl::map<mpl::pair<SingleThreaded, SingleImpl>
                                    , mpl::pair<ThreadSafe, ThreadedImpl>
                                    , mpl::pair<Forkable, ForkedImpl>>;
@@ -129,7 +129,7 @@ namespace rnd
 
   template <template <int> class Algorithm, class RandomFunc>
   using ImplementsValList =
-    typename mpl::transform<BitsRange, typename ImplementsWrapper<Algorithm, RandomFunc>::Result<mpl::_1>, VectorInserter>::type;
+    typename mpl::transform<BitsRange, typename ImplementsWrapper<Algorithm, RandomFunc>::template Result<mpl::_1>, VectorInserter>::type;
 
 
   template <template <int> class Algorithm, class RandomFunc>
@@ -142,11 +142,10 @@ namespace rnd
 
 
   template <template <int> class Algorithm, class RandomFunc>
-  class AnyImplements
+  struct AnyImplements
   {
-    // QUESTION: why this member is visible in template argument expression?
     static bool const value = mpl::count_if<ImplementsValList<Algorithm, RandomFunc>,
-      typename IsTrue<Algorithm, RandomFunc>::Result<mpl::_1 >>::type::value > 0;
+      typename IsTrue<Algorithm, RandomFunc>::template Result<mpl::_1>>::type::value > 0;
   };
 
   template <class RandomFunc>

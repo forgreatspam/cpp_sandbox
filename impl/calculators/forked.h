@@ -17,6 +17,8 @@ namespace rnd
   template <class Method>
   class CalculatorForked : public ForkedCommon<Method>
   {
+    using Base = ForkedCommon<Method>;
+
   public:
     static int const MIN_CHUNK_PER_THREAD = 5000;
 
@@ -26,22 +28,22 @@ namespace rnd
 
     void Update(size_t curRepeat)
     {
-      unsigned const threadCount = GetThreadCount(curRepeat);
+      unsigned const threadCount = Base::GetThreadCount(curRepeat);
       typedef std::future<Estimate> EstimateFuture;
       std::vector<EstimateFuture> futures;
       futures.reserve(threadCount);
 
       size_t const chunkSize = curRepeat / threadCount;
 
-      futures.emplace_back(std::async(std::launch::deferred, &rnd::GetEstimate<RandomGenerator>,
-        std::ref(randomGenerators_[threadCount - 1]), std::ref(equation_), curRepeat - chunkSize * (threadCount - 1)));
+      futures.emplace_back(std::async(std::launch::deferred, &rnd::GetEstimate<typename Base::RandomGenerator>,
+        std::ref(Base::randomGenerators_[threadCount - 1]), std::ref(Base::equation_), curRepeat - chunkSize * (threadCount - 1)));
 
       for (auto ii : util::range(threadCount - 1))
-        futures.emplace_back(std::async(std::launch::async, &rnd::GetEstimate<RandomGenerator>,
-          std::ref(randomGenerators_[ii]), std::ref(equation_), chunkSize));
+        futures.emplace_back(std::async(std::launch::async, &rnd::GetEstimate<typename Base::RandomGenerator>,
+          std::ref(Base::randomGenerators_[ii]), std::ref(Base::equation_), chunkSize));
 
-      UpdateEstimate(std::move(futures));
-      repeat_ += curRepeat;
+      Base::UpdateEstimate(std::move(futures));
+      Base::repeat_ += curRepeat;
     }
   };
 

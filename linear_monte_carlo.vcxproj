@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);e:\Дом\c++\boost\boost_1_59_0\</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);e:\Work\cpp_sandbox\boost_1_60_0\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);e:\Дом\c++\boost\boost_1_59_0\</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);e:\Work\cpp_sandbox\boost_1_60_0\</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,6 +110,7 @@
     <ClInclude Include="util\thread_pool.h" />
     <ClInclude Include="util\timer.h" />
     <ClInclude Include="util\traits.h" />
+    <ClInclude Include="util\unused.h" />
     <ClInclude Include="util\zip.h" />
   </ItemGroup>
   <ItemGroup>

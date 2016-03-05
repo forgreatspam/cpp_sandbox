@@ -68,9 +68,9 @@ namespace rnd
       , rndImpl_(rndImpl)
     {}
 
-    RandomFunc rndImpl_;
     size_t vectorNum_;
     size_t row_;
+    RandomFunc rndImpl_;
   };
 
 
