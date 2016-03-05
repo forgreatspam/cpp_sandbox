@@ -52,7 +52,7 @@ namespace rnd
     }
 
     unsigned const maxThreadCount_;
-    using RandomGenerator = typename Method::template InstanceType<thread_mode::Forkable>;
+    using RandomGenerator = MethodInstanceType<Method, thread_mode::Forkable>;
     std::vector<RandomGenerator> randomGenerators_;
   };
 }

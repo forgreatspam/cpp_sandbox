@@ -32,9 +32,6 @@ namespace rnd
       return CreateGenerator(std::move(randomFunc));
     }
 
-    template <class ThreadMode>
-    using InstanceType = decltype(std::declval<Method>().CreateInstance<ThreadMode>());
-
     decltype(auto) GetName() const
     {
       return GetName_(mpl::identity<Algorithm>());
@@ -70,4 +67,7 @@ namespace rnd
   {
     return stream << method.GetName();
   }
+
+  template <class Method, class ThreadMode>
+  using MethodInstanceType = decltype(std::declval<Method>().CreateInstance<ThreadMode>());
 }

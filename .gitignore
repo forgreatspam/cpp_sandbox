@@ -1,6 +1,6 @@
 result.txt
-Release
-Debug
+Release*
+Debug*
 .vs
 ipch
 *.suo

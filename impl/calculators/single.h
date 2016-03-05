@@ -27,7 +27,7 @@ namespace rnd
     }
 
   private:
-    using RandomGenerator = typename Method::template InstanceType<thread_mode::SingleThreaded>;
+    using RandomGenerator = MethodInstanceType<Method, thread_mode::SingleThreaded>;
     RandomGenerator randomGenerator_;
   };
 

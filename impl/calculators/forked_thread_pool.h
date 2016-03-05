@@ -46,8 +46,8 @@ namespace rnd
         futures.emplace_back(task.get_future());
 
         // std::function cannot be constructed from non-copyable functor
-        // therefore, I cannot use just "task{ move(task) }" in lambda capture
-        threadPool_->Post([this, task{ std::make_shared<PackagedTask>(move(task)) }, ii, chunkSize]() mutable {
+        // therefore, I cannot use just "task { move(task) }" in lambda capture
+        threadPool_->Post([this, task = std::make_shared<PackagedTask>(move(task)), ii, chunkSize]() mutable {
             (*task)(std::ref(Base::randomGenerators_[ii]), std::ref(Base::equation_), chunkSize);
         });
       }
