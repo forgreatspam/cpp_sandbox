@@ -118,6 +118,9 @@
     <ClInclude Include="util\unused.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="util\apply.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="linear_monte_carlo.cpp">

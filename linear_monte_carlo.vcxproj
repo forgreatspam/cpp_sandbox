@@ -103,6 +103,7 @@
     <ClInclude Include="impl\types.h" />
     <ClInclude Include="settings\equation.h" />
     <ClInclude Include="settings\settings.h" />
+    <ClInclude Include="util\apply.h" />
     <ClInclude Include="util\create_instance.h" />
     <ClInclude Include="util\range.h" />
     <ClInclude Include="util\spinlock.h" />
