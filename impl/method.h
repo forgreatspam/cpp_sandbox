@@ -69,5 +69,5 @@ namespace rnd
   }
 
   template <class Method, class ThreadMode>
-  using MethodInstanceType = decltype(std::declval<Method>().CreateInstance<ThreadMode>());
+  using MethodInstanceType = decltype(std::declval<Method>().template CreateInstance<ThreadMode>());
 }
