@@ -9,5 +9,11 @@ Instructions for lazy:
 4. Install python3. If you use Windows, ensure that path to Python and Python\Scripts folders are in PATH environment variable.
 5. Install meson by calling ```pip3 install meson```.
 6. Create a folder named 'build'.
-7. run ```python3 meson build --buildtype release```. Notice, you might need to provide full path to 'meson' script which is normally located in python/scripts folder. In case of MSVC, you should run this command from VS command prompt.
-8. go to 'build' folder and run ```ninja``` here.
+
+The next steps depend on the compiler:
+
+7. gcc 6.0 for Linux. Run ```meson build --buildtype release```
+8. clang 3.8 for Linux. Run ```CC=/usr/bin/clang-3.8 CXX=/usr/bin/clang++-3.8 meson build --buildtype release```
+9. MSVC 2015 update 2. Open VS command prompt and run ```python3 full\path\to\meson build --buildtype release``` Notice, you might need to provide full path to 'meson' script which is normally located in python/scripts folder.
+
+10. Go to 'build' folder and run ```ninja``` here.

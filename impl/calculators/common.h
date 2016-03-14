@@ -42,7 +42,7 @@ namespace rnd
   };
 
 
-  template <class Printer, class Method, template <class Method> class Calculator>
+  template <class Printer, class Method, template <class> class Calculator>
   Printer & operator << (Printer & printer, Calculator<Method> const & calculator)
   {
     rnd::PrinterWrapper<Printer> printWrapper(printer);

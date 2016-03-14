@@ -1,4 +1,4 @@
-project('linear_monte_carlo', 'cpp')
+project('linear_monte_carlo', 'cpp', default_options : ['cpp_std=c++14'])
 
 # Place path to boost here
 inc = include_directories('')
