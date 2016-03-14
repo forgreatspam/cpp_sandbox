@@ -3,7 +3,7 @@
 #include <numeric>
 #include <vector>
 
-#include <boost/tuple/tuple.hpp>
+#include <boost/hana.hpp>
 
 #include "settings/settings.h"
 #include "util/range.h"
@@ -29,9 +29,10 @@ namespace linear
 
     ResizedVector & operator+=(ResizedVector const & add)
     {
-      using namespace boost;
+      using namespace boost::hana::literals;
+
       for (auto x : util::zip(*this, add))
-        get<0>(x) += get<1>(x);
+        x[0_c] += x[1_c];
       return *this;
     }
   };

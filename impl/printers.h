@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-#include <boost/tuple/tuple.hpp>
+#include <boost/hana.hpp>
 
 #include "util/zip.h"
 #include "types.h"
@@ -41,12 +41,12 @@ namespace rnd
 
     static auto GetVariance_(linear::Vector const & estimate, linear::Vector const & sumSq, size_t repeat)
     {
-      using namespace boost;
+      using namespace boost::hana::literals;
 
       linear::Vector variance{};
 
       for (auto x : util::zip(variance, estimate, sumSq))
-        get<0>(x) = std::sqrt(get<2>(x) / repeat - std::pow(get<1>(x), 2));
+        x[0_c] = std::sqrt(x[2_c] / repeat - std::pow(x[1_c], 2));
       return variance;
     }
   };
