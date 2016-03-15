@@ -18,7 +18,7 @@ namespace rnd
   template <template <class> class T>
   using TemplateIdentity = mpl::identity<T<mpl::_1>>;;
 
-  using CalculatorSingleThreadedId = TemplateIdentity<CalculatorSingleThreaded>;
+  using CalculatorSingleThreadedId = TemplateIdentity<CalculatorSingleThreaded>;  // TODO: replace with hana::type_c, see hana::make_type
   using CalculatorForkedId = TemplateIdentity<CalculatorForked>;
   using CalculatorThreadPoolId = TemplateIdentity<CalculatorThreadPool>;
 
