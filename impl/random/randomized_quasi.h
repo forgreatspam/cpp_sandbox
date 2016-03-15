@@ -1,13 +1,7 @@
 #pragma once
 #include <type_traits>
 
-#include <boost/mpl/map.hpp>
-#include <boost/mpl/range_c.hpp>
-#include <boost/mpl/transform.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/back_inserter.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/mpl/count_if.hpp>
+#include <boost/hana.hpp>
 
 #include "impl/thread_mode.h"
 #include "./uniform_random.h"
@@ -18,11 +12,13 @@
 // Notice, there is no scientific reason to use these 'methods', but they provided quite
 // a good task for using MPL
 
-namespace mpl = boost::mpl;
+namespace hana = boost::hana;
 
 
 namespace rnd
 {
+  int const MAX_BITS = 10;
+
   template <int bits>
   struct RandomizedHalton;
 
@@ -43,7 +39,7 @@ namespace rnd
 
     template <class Arg, class... Args, typename = 
       std::enable_if_t<
-        !util::IsCopyCtorArg_v<Randomized, Arg, Args...>
+        !util::IsCopyCtorArg_v<Randomized, Arg, Args...>  // TODO: camelCase?
       >
     >
     Randomized(Arg && arg, Args &&... args)
@@ -109,49 +105,27 @@ namespace thread_mode
 
 namespace rnd
 {
-  int const MAX_BITS = 10;
-
-
-  template <template <int> class Algorithm, class RandomFunc>
-  struct ImplementsWrapper
+  namespace detail
   {
-    template <class Num>
-    struct Result: public thread_mode::Implements<Algorithm<Num::value>, RandomFunc>
-    {};
-  };
+    constexpr auto bitsRange = hana::to_tuple(hana::make_range(hana::int_c<0>, hana::int_c<MAX_BITS + 1>));
 
+    template <template <int> class Algorithm, class RandomFunc>
+    struct Implements  // NOTICE: constexpr lambdas are not supported yet, functions cannot accept auto parameter :(
+    {
+      template <class IntegralConst>
+      constexpr bool operator()(IntegralConst) const
+      {
+        return thread_mode::Implements<Algorithm<IntegralConst::value>, RandomFunc>::value;
+      }
+    };
 
-  using VectorInserter = mpl::back_inserter<mpl::vector<>>;
-
-
-  using BitsRange = mpl::range_c<int, 0, MAX_BITS>;
-
-
-  template <template <int> class Algorithm, class RandomFunc>
-  using ImplementsValList =
-    typename mpl::transform<BitsRange, typename ImplementsWrapper<Algorithm, RandomFunc>::template Result<mpl::_1>, VectorInserter>::type;
-
-
-  template <template <int> class Algorithm, class RandomFunc>
-  struct IsTrue
-  {
-    template <class T>
-    struct Result : public T
-    {};
-  };
-
-
-  template <template <int> class Algorithm, class RandomFunc>
-  struct AnyImplements
-  {
-    static bool const value = mpl::count_if<ImplementsValList<Algorithm, RandomFunc>,
-      typename IsTrue<Algorithm, RandomFunc>::template Result<mpl::_1>>::type::value > 0;
-  };
+    template <template <int> class Algorithm, class RandomFunc>
+    constexpr auto anyImplements = hana::any(hana::transform(bitsRange, Implements<Algorithm, RandomFunc>{}));
+  }
 
   template <class RandomFunc>
   struct RandomGenerator<RandomFunc, std::enable_if_t<
-    AnyImplements<RandomizedHalton, RandomFunc>::value
-      || AnyImplements<RandomizedSobol, RandomFunc>::value>>
+    detail::anyImplements<RandomizedHalton, RandomFunc> || detail::anyImplements<RandomizedSobol, RandomFunc>>>
     : public RandomGeneratorQuasi<RandomFunc>
   {
     template <class... Args>
