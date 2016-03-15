@@ -43,7 +43,7 @@ namespace thread_mode
 
     template <class Arg, class... Args, typename =
       std::enable_if_t<
-        !util::IsCopyCtorArg<ThreadedFromSingle, Arg, Args...>::value
+        !util::IsCopyCtorArg_v<ThreadedFromSingle, Arg, Args...>
       >
     >
     ThreadedFromSingle(Arg&& arg, Args&&... args)
@@ -82,7 +82,7 @@ namespace thread_mode
 
     template <class Arg, class... Args, typename =
       std::enable_if_t<
-        !util::IsCopyCtorArg<ForkedFromThreadSafe, Arg, Args...>::value
+        !util::IsCopyCtorArg_v<ForkedFromThreadSafe, Arg, Args...>
       >
     >
     ForkedFromThreadSafe(Arg&& arg, Args&&... args)

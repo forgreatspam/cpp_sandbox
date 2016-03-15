@@ -43,7 +43,7 @@ namespace rnd
 
     template <class Arg, class... Args, typename = 
       std::enable_if_t<
-        !util::IsCopyCtorArg<Randomized, Arg, Args...>::value
+        !util::IsCopyCtorArg_v<Randomized, Arg, Args...>
       >
     >
     Randomized(Arg && arg, Args &&... args)
