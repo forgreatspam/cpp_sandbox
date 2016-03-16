@@ -39,7 +39,7 @@ namespace rnd
 
     template <class Arg, class... Args, typename = 
       std::enable_if_t<
-        !util::IsCopyCtorArg_v<Randomized, Arg, Args...>  // TODO: camelCase?
+        !util::isCopyCtorArg<Randomized, Arg, Args...>
       >
     >
     Randomized(Arg && arg, Args &&... args)
@@ -82,7 +82,7 @@ namespace thread_mode
             class ThreadedImpl = ThreadedFromSingle<SingleImpl>,
             class ForkedImpl = ForkedFromSingle<SingleImpl>>
   constexpr auto threadModeHelper = hana::make_map(
-      hana::make_pair(hana::type_c<SingleThreaded>, hana::type_c<SingleImpl>)  // TODO: remove type_c
+      hana::make_pair(hana::type_c<SingleThreaded>, hana::type_c<SingleImpl>)
     , hana::make_pair(hana::type_c<ThreadSafe>, hana::type_c<ThreadedImpl>)
     , hana::make_pair(hana::type_c<Forkable>, hana::type_c<ForkedImpl>));
 

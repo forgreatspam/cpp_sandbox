@@ -20,6 +20,7 @@ namespace settings
 {
   namespace mpl = boost::mpl;
 
+
   size_t const DIMENSION = 20;
   size_t const MIN_REPEAT = 10;
   size_t const MAX_REPEAT = 100'000;

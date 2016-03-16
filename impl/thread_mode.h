@@ -9,20 +9,18 @@
 
 namespace thread_mode
 {
+  namespace hana = boost::hana;
+
+
   struct SingleThreaded;
   struct ThreadSafe;
   struct Forkable;
-
-
-  namespace mpl = boost::mpl;
-  namespace hana = boost::hana;  // TODO: check namespace is declared inside other namespace
 
 
   template <class Algorithm>
   constexpr auto threadModes = hana::nothing;
 
 
-  // TODO: make it more clear?
   template <class Algorithm, class Mode>
   using GetThreadMode = typename std::decay_t<decltype(threadModes<Algorithm>[hana::type_c<Mode>])>::type;
 
@@ -41,7 +39,7 @@ namespace thread_mode
 
     template <class Arg, class... Args, typename =
       std::enable_if_t<
-        !util::IsCopyCtorArg_v<ThreadedFromSingle, Arg, Args...>
+        !util::isCopyCtorArg<ThreadedFromSingle, Arg, Args...>
       >
     >
     ThreadedFromSingle(Arg&& arg, Args&&... args)
@@ -80,7 +78,7 @@ namespace thread_mode
 
     template <class Arg, class... Args, typename =
       std::enable_if_t<
-        !util::IsCopyCtorArg_v<ForkedFromThreadSafe, Arg, Args...>
+        !util::isCopyCtorArg<ForkedFromThreadSafe, Arg, Args...>
       >
     >
     ForkedFromThreadSafe(Arg&& arg, Args&&... args)

@@ -21,7 +21,6 @@ namespace rnd
     using Base = ForkedCommon<Method>;
 
   public:
-    // TODO: eliminate copy/paste
     CalculatorThreadPool(linear::Equation const & equation, Method method)
       : ForkedCommon<Method>(equation, std::move(method))
       , threadPool_(std::make_shared<util::ThreadPool>(Base::maxThreadCount_ - 1))

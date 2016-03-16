@@ -2,6 +2,8 @@
 // Notice, boost has random numbers generator implementation, but it is
 // not thread safe. They recommend to use mutexes which will work, but will cause
 // significant performance loss in our case
+#include <type_traits>
+
 #include "util/traits.h"
 
 
@@ -77,6 +79,6 @@ namespace rnd
   template <class RandomFunc>
   decltype(auto) CreateGenerator(RandomFunc && randomFunc)
   {
-    return RandomGenerator<util::BaseType<RandomFunc>>(std::forward<RandomFunc>(randomFunc));
+    return RandomGenerator<std::decay_t<RandomFunc>>(std::forward<RandomFunc>(randomFunc));
   }
 }

@@ -18,11 +18,12 @@
 #include "util/timer.h"
 
 
-namespace bf = boost::fusion;
-namespace mpl = boost::mpl;
-
 namespace rnd
 {
+  namespace bf = boost::fusion;
+  namespace mpl = boost::mpl;
+
+
   template <class CalculatorIdentity, class Methods>
   void MakeExperimentsImpl(linear::Equation const & equation, Methods methods, size_t minRepeat, size_t maxRepeat,
     std::ostream & stream = std::cout)
