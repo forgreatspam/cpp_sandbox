@@ -17,6 +17,9 @@
 
 namespace rnd
 {
+  namespace mpl = boost::mpl;
+
+
   template <class Algorithm, class... Args>
   struct Method
   {

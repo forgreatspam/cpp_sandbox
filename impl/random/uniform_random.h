@@ -144,7 +144,7 @@ namespace rnd
       counter_ = N;
     }
 
-    constexpr ValueType GetPow_(ValueType val, int n) const
+    constexpr ValueType GetPow_(ValueType val, size_t n) const
     {
       return n ? val * GetPow_(val, n - 1) : 1;
     }

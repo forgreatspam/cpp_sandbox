@@ -27,6 +27,7 @@ namespace settings
   char const * LOG_FILE_NAME = "result.txt";
 
 
+  // NOTICE: Presumably being a 'superset' of mpl and fusion, hana does not have template placeholders.
   using Calculators = mpl::list<
       rnd::CalculatorSingleThreadedId
     , rnd::CalculatorForkedId

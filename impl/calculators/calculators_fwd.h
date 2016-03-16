@@ -2,10 +2,12 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
 
-namespace mpl = boost::mpl;
 
 namespace rnd
 {
+  namespace mpl = boost::mpl;
+
+
   template <class Method>
   class CalculatorSingleThreaded;
 
