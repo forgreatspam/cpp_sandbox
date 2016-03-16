@@ -1,10 +1,12 @@
 #pragma once
 #include <type_traits>
-#include <boost/mpl/map.hpp>
+
+#include <boost/hana.hpp>
+
 #include "thread_mode.h"
 
 
-namespace mpl = boost::mpl;
+namespace hana = boost::hana;
 
 
 namespace rnd
@@ -30,23 +32,22 @@ namespace rnd
   namespace thread_mode \
   { \
     template<> \
-    struct ThreadModes<RandomType> \
-      : boost::mpl::map <
+    constexpr auto threadModes<RandomType> = \
+        hana::make_map(
 
 
 #define IMPLEMENTS(ThreadMode, Impl) \
-  mpl::pair<ThreadMode, Impl>
+  hana::make_pair(hana::type_c<ThreadMode>, hana::type_c<Impl>)
 
 
 #define END_DECLARE_RANDOM_GENERATOR(RandomType) \
-    > \
-  {}; \
+    ); \
   } \
    \
   namespace rnd \
   { \
     template <class RandomFunc> \
-    struct RandomGenerator<RandomFunc, std::enable_if_t<thread_mode::Implements<RandomType, RandomFunc>::value>> \
+    struct RandomGenerator<RandomFunc, std::enable_if_t<thread_mode::implements<RandomType, RandomFunc>>> \
       : public GeneratorAdaptorType_<RandomType, RandomFunc> \
     { \
       template <class... Args> \

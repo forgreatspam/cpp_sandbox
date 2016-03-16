@@ -81,25 +81,24 @@ namespace thread_mode
   template <class SingleImpl,
             class ThreadedImpl = ThreadedFromSingle<SingleImpl>,
             class ForkedImpl = ForkedFromSingle<SingleImpl>>
-  using ThreadModeHelper = mpl::map<mpl::pair<SingleThreaded, SingleImpl>
-                                   , mpl::pair<ThreadSafe, ThreadedImpl>
-                                   , mpl::pair<Forkable, ForkedImpl>>;
+  constexpr auto threadModeHelper = hana::make_map(
+      hana::make_pair(hana::type_c<SingleThreaded>, hana::type_c<SingleImpl>)  // TODO: remove type_c
+    , hana::make_pair(hana::type_c<ThreadSafe>, hana::type_c<ThreadedImpl>)
+    , hana::make_pair(hana::type_c<Forkable>, hana::type_c<ForkedImpl>));
 
 
   template <int bits>
-  struct ThreadModes<rnd::RandomizedHalton<bits>>
-    : ThreadModeHelper<rnd::Randomized<rnd::Halton, thread_mode::SingleThreaded, bits>,
-               rnd::Randomized<rnd::Halton, thread_mode::ThreadSafe, bits>,
-               rnd::Randomized<rnd::Halton, thread_mode::Forkable, bits >>
-  {};
+  constexpr auto threadModes<rnd::RandomizedHalton<bits>> =
+      threadModeHelper<rnd::Randomized<rnd::Halton, thread_mode::SingleThreaded, bits>,
+                       rnd::Randomized<rnd::Halton, thread_mode::ThreadSafe, bits>,
+                       rnd::Randomized<rnd::Halton, thread_mode::Forkable, bits>>;
 
 
   template <int bits>
-  struct ThreadModes<rnd::RandomizedSobol<bits>>
-    : ThreadModeHelper<rnd::Randomized<rnd::Sobol, thread_mode::SingleThreaded, bits>,
-               rnd::Randomized<rnd::Sobol, thread_mode::ThreadSafe, bits>,
-               rnd::Randomized<rnd::Sobol, thread_mode::Forkable, bits >>
-  {};
+  constexpr auto threadModes<rnd::RandomizedSobol<bits>> =
+      threadModeHelper<rnd::Randomized<rnd::Sobol, thread_mode::SingleThreaded, bits>,
+                       rnd::Randomized<rnd::Sobol, thread_mode::ThreadSafe, bits>,
+                       rnd::Randomized<rnd::Sobol, thread_mode::Forkable, bits>>;
 }
 
 
@@ -115,7 +114,7 @@ namespace rnd
       template <class IntegralConst>
       constexpr bool operator()(IntegralConst) const
       {
-        return thread_mode::Implements<Algorithm<IntegralConst::value>, RandomFunc>::value;
+        return thread_mode::implements<Algorithm<IntegralConst::value>, RandomFunc>;
       }
     };
 

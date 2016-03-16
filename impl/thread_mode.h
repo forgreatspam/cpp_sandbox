@@ -1,13 +1,9 @@
 #pragma once
 #include <mutex>
 #include <memory>
+#include <type_traits>
 
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/transform.hpp>
-#include <boost/mpl/contains.hpp>
-#include <boost/mpl/back_inserter.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/mpl/placeholders.hpp>
+#include <boost/hana.hpp>
 
 #include "util/traits.h"
 
@@ -19,14 +15,16 @@ namespace thread_mode
 
 
   namespace mpl = boost::mpl;
+  namespace hana = boost::hana;  // TODO: check namespace is declared inside other namespace
 
 
   template <class Algorithm>
-  struct ThreadModes;
+  constexpr auto threadModes = hana::nothing;
 
 
+  // TODO: make it more clear?
   template <class Algorithm, class Mode>
-  using GetThreadMode = typename mpl::at<ThreadModes<Algorithm>, Mode>::type;
+  using GetThreadMode = typename std::decay_t<decltype(threadModes<Algorithm>[hana::type_c<Mode>])>::type;
 
 
   // TODO: move to utils
@@ -109,13 +107,6 @@ namespace thread_mode
   using ForkedFromSingle = ForkedFromThreadSafe<ThreadedFromSingle<T>>;
 
 
-  using VectorInserter = mpl::back_inserter<mpl::vector<>>;
-
-
-  template <class Map>
-  using Values_ = typename mpl::transform<Map, mpl::second<mpl::_1>, VectorInserter>::type;
-
-
   template <class Algorithm, class Impl>
-  using Implements = typename mpl::contains<Values_<thread_mode::ThreadModes<Algorithm>>, Impl>::type;
+  constexpr bool implements = hana::contains(hana::values(thread_mode::threadModes<Algorithm>), hana::type_c<Impl>);
 }
