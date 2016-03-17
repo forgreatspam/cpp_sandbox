@@ -15,6 +15,7 @@ namespace rnd { namespace
                     size_t const repeat, Estimate & estimate)
   {
     double const continueProbability = 0.95;
+    double const coeff = linear::Equation::dimension / continueProbability;
 
     // Notice, that loops order is essential for quasi-random numbers
     // The estimate parameters are not optimal and do not even tend to be optimal
@@ -35,8 +36,8 @@ namespace rnd { namespace
             break;
           }
           else {
-            size_t const newPos = static_cast<size_t>(randomVal * linear::Equation::dimension / continueProbability);
-            estimateInPoint *= equation.matrix[pos][newPos] * linear::Equation::dimension / continueProbability;
+            size_t const newPos = static_cast<size_t>(randomVal * coeff);
+            estimateInPoint *= equation.matrix[pos][newPos] * coeff;
             pos = newPos;
           }
         }
