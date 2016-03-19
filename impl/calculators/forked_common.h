@@ -2,6 +2,8 @@
 #include <thread>
 #include <memory>
 #include <vector>
+#include <array>
+#include <boost/range/adaptor/transformed.hpp>
 
 #include "./calculators_fwd.h"
 #include "./common.h"
@@ -19,8 +21,12 @@ namespace rnd
   class ForkedCommon: public CalculatorBase<Method>
   {
     using Base = CalculatorBase<Method>;
-  public:
     static int const MIN_CHUNK_PER_THREAD = 5000;
+    // Notice: the PADDING size must be at lease as large as cache line size
+    static int const PADDING = 64;  // TODO: use http://stackoverflow.com/a/4049562
+
+  public:
+    using RandomGenerator = MethodInstanceType<Method, thread_mode::Forkable>;
 
     ForkedCommon(linear::Equation const & equation, Method method)
       : CalculatorBase<Method>(equation, std::move(method))
@@ -33,7 +39,11 @@ namespace rnd
       randomGenerators_.emplace_back(std::move(randomGenerator));
     }
 
-  protected:
+    auto GetMaxThreadCount() const
+    {
+      return maxThreadCount_;
+    }
+
     size_t GetThreadCount(size_t repeat) const
     {
       return std::max<size_t>(1u, std::min<size_t>(maxThreadCount_, repeat / MIN_CHUNK_PER_THREAD));
@@ -51,8 +61,34 @@ namespace rnd
       }
     }
 
+    auto GetRandomGenerators()
+    {
+      // TODO: why I needed to specify return type explicitly?
+      return  boost::adaptors::transform(randomGenerators_, 
+        [this](auto & paddedRandomGenerator) -> RandomGenerator & { return paddedRandomGenerator.Get(); });
+    }
+
+  private:
+    class PaddedRandomGenerator
+    {
+    public:
+      PaddedRandomGenerator() {}
+
+      PaddedRandomGenerator(RandomGenerator && from)
+        : randomGenerator_(std::move(from))
+      {}
+
+      auto & Get()
+      {
+        return randomGenerator_;
+      }
+
+    private:
+      RandomGenerator randomGenerator_;
+      std::array<char, PADDING> _;
+    };
+
+    std::vector<PaddedRandomGenerator> randomGenerators_;
     unsigned const maxThreadCount_;
-    using RandomGenerator = MethodInstanceType<Method, thread_mode::Forkable>;
-    std::vector<RandomGenerator> randomGenerators_;
   };
 }

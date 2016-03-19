@@ -18,7 +18,7 @@ namespace rnd
   ValueType const DEFAULT_START = 1234567;
   ValueType const MULTIPLIER = 663608941;
   double const MAX_VALUE = static_cast<double>(std::numeric_limits<ValueType>::max());
-  int const FORKED_VERSION_STEP = 50;
+  int const FORKED_VERSION_STEP = 400;
 
 
   inline ValueType GetNextOdd(ValueType val)

@@ -11,6 +11,7 @@
 #include "impl/neumann_solver.h"
 #include "util/range.h"
 #include "util/thread_pool.h"
+#include "util/unused.h"
 
 
 namespace rnd
@@ -23,7 +24,7 @@ namespace rnd
   public:
     CalculatorThreadPool(linear::Equation const & equation, Method method)
       : ForkedCommon<Method>(equation, std::move(method))
-      , threadPool_(std::make_shared<util::ThreadPool>(Base::maxThreadCount_ - 1))
+      , threadPool_(std::make_shared<util::ThreadPool>(Base::GetMaxThreadCount() - 1))
     {}
 
     void Update(size_t curRepeat)
@@ -39,22 +40,27 @@ namespace rnd
       using Task = Estimate(typename Base::RandomGenerator &, const linear::Equation &, size_t);
       using PackagedTask = std::packaged_task<Task>;
 
-      for (auto ii : util::range(threadCount - 1))
+      auto randomGeneratorsIt = Base::GetRandomGenerators().begin();
+
+      for (auto _ UNUSED : util::range(threadCount - 1))
       {
         auto task = PackagedTask(&rnd::GetEstimate<typename Base::RandomGenerator>);
         futures.emplace_back(task.get_future());
 
+        // NOTICE: capturing reference to randomGeneratorsIt is a bad idea because of race condition in lazy computation
+        auto randomGenerator = std::ref(*randomGeneratorsIt++);
+
         // std::function cannot be constructed from non-copyable functor
         // therefore, I cannot use just "task { move(task) }" in lambda capture
-        threadPool_->Post([this, task = std::make_shared<PackagedTask>(move(task)), ii, chunkSize]() mutable {
-            (*task)(std::ref(Base::randomGenerators_[ii]), std::ref(Base::equation_), chunkSize);
+        threadPool_->Post([this, task = std::make_shared<PackagedTask>(move(task)), randomGenerator, chunkSize]() mutable {
+            (*task)(randomGenerator, std::ref(Base::equation_), chunkSize);
         });
       }
 
       auto task = PackagedTask(&rnd::GetEstimate<typename Base::RandomGenerator>);
       futures.emplace_back(task.get_future());
       size_t const restRepeatCount = curRepeat - chunkSize * (threadCount - 1);
-      task(std::ref(Base::randomGenerators_[threadCount - 1]), std::ref(Base::equation_), restRepeatCount);
+      task(std::ref(*randomGeneratorsIt), std::ref(Base::equation_), restRepeatCount);
 
       Base::UpdateEstimate(std::move(futures));
       Base::repeat_ += curRepeat;
