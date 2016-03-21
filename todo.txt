@@ -3,10 +3,8 @@
 * try cmake, at least to compare with meson build
 * test agains gcc 6.0
 * compile to AsmJS
-* use ublas
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform
 * separate output logic from the core algorithms
-* use profiler, check https://blogs.msdn.microsoft.com/visualstudioalm/2015/10/29/profile-your-cpu-in-the-debugger-in-visual-studio-2015/ for example
 * use code coverage during tests. See gcov
 * use clang static analyzer, see https://github.com/mesonbuild/meson/wiki/Cheat%20sheet#using-clang-static-analyzer
 * check other features here: https://github.com/mesonbuild/meson/wiki/Feature%20autodetection

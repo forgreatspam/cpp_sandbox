@@ -15,6 +15,12 @@ namespace linear
   template <class T, size_t initialSize> struct ResizedVector;
 
 
+  // NOTICE: A few words about reinventing the wheels.
+  // I used thes simple types having an idea to use boost::ublas or boost::multi_array.
+  // But it appeared that these libraries are slower than this evidently inefficient construct
+  // even with debug checks switched off.
+  // I do not want to spend time on searching for a faster library and even less I want to
+  // make my invented wheel more round :), so let this code remains as is forever.
   typedef ResizedVector<double, settings::DIMENSION> Vector;
   typedef ResizedVector<Vector, settings::DIMENSION> Matrix;
 

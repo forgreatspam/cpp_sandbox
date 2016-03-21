@@ -35,7 +35,8 @@ namespace rnd { namespace
             randomGenerator.NextVector();
             break;
           }
-          else {
+          else
+          {
             size_t const newPos = static_cast<size_t>(randomVal * coeff);
             estimateInPoint *= equation.matrix[pos][newPos] * coeff;
             pos = newPos;
