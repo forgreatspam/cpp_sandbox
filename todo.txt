@@ -1,4 +1,3 @@
-* use static analyzer
 * use automated documentation
 * try cmake, at least to compare with meson build
 * test agains gcc 6.0
@@ -6,6 +5,4 @@
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform
 * separate output logic from the core algorithms
 * use code coverage during tests. See gcov
-* use clang static analyzer, see https://github.com/mesonbuild/meson/wiki/Cheat%20sheet#using-clang-static-analyzer
-* check other features here: https://github.com/mesonbuild/meson/wiki/Feature%20autodetection
-
+* use environment variables to define path to boost, gmock, hana etc.
