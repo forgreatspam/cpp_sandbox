@@ -10,7 +10,7 @@
 namespace rnd
 {
   template <class RandomFunc, class Enable = void>
-  class RandomGenerator;  // To be specialized for each kind of random function
+  struct RandomGenerator;  // To be specialized for each kind of random function
 
 
   template <class RandomFunc>
