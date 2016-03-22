@@ -1572,7 +1572,6 @@ namespace rnd {
       else if (*seed <= seed_save)
       {
         seed_save = 0;
-        l = 1;
         for (i = 0; i < dim_num; i++)
         {
           lastq[i] = 0;
