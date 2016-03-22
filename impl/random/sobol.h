@@ -1603,10 +1603,16 @@ namespace rnd {
         }
         l = i8_bit_lo0(*seed);
       }
+      else
+      {
+        l = 1;
+        assert("unexpected");
+      }
       //
       //  Check that the user is not calling too many times!
       //
       assert("The value of SEED seems to be too large" && maxcol >= l);
+      
       //
       //  Calculate the new components of QUASI.
       //  The caret indicates the bitwise exclusive OR.
