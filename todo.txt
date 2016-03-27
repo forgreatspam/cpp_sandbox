@@ -5,4 +5,4 @@
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform
 * separate output logic from the core algorithms
 * use code coverage during tests. See gcov
-* use environment variables to define path to boost, gmock, hana etc.
+
