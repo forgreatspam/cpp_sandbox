@@ -21,16 +21,19 @@ namespace rnd
   int const FORKED_VERSION_STEP = 400;
 
 
-  inline ValueType GetNextOdd(ValueType val)
+  namespace detail
   {
-    return val % 2 ? val : val + 1;
+    inline ValueType GetNextOdd(ValueType val)
+    {
+      return val % 2 ? val : val + 1;
+    }
   }
 
 
   struct UniformRandomSingleThreaded
   {
     UniformRandomSingleThreaded(ValueType start = DEFAULT_START) // !!! explicit
-      : val_{ GetNextOdd(start) }
+      : val_{ detail::GetNextOdd(start) }
     {}
 
     double operator()() noexcept
@@ -48,7 +51,7 @@ namespace rnd
   struct UniformRandomWithMutex
   {
     explicit UniformRandomWithMutex(ValueType start = DEFAULT_START)
-      : val_{ GetNextOdd(start) }
+      : val_{ detail::GetNextOdd(start) }
     {}
 
     UniformRandomWithMutex(UniformRandomWithMutex const &) = delete;
@@ -79,7 +82,7 @@ namespace rnd
   struct UniformRandomLockFree
   {
     explicit UniformRandomLockFree(ValueType start = DEFAULT_START)
-      : val_{ GetNextOdd(start) }
+      : val_{ detail::GetNextOdd(start) }
     {}
 
     UniformRandomLockFree(UniformRandomLockFree const &) = delete;
@@ -109,7 +112,7 @@ namespace rnd
 
     explicit UniformRandomForkable(ValueType start = DEFAULT_START)
       : counter_{ N }
-      , localVal_{ GetNextOdd(start) }
+      , localVal_{ detail::GetNextOdd(start) }
       , sharedVal_{ std::make_shared<AtomicValueType>(localVal_) }
     {}
 
@@ -160,6 +163,6 @@ namespace rnd
 
 BEGIN_DECLARE_RANDOM_GENERATOR(rnd::UniformRandom, rnd::RandomGeneratorPseudo)
   IMPLEMENTS(SingleThreaded, rnd::UniformRandomSingleThreaded),
-  IMPLEMENTS(ThreadSafe, rnd::UniformRandomLockFree),  // or detail::UniformRandomSpinLock
+  IMPLEMENTS(ThreadSafe, rnd::UniformRandomLockFree),  // or rnd::UniformRandomSpinLock
   IMPLEMENTS(Forkable, rnd::UniformRandomForkable<rnd::FORKED_VERSION_STEP>)
 END_DECLARE_RANDOM_GENERATOR(rnd::UniformRandom)
