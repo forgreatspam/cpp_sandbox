@@ -311,8 +311,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="impl\random\uniform_random.h" />
     <ClInclude Include="impl\random\uniform_random_test.h" />
+    <ClInclude Include="util\zip_test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />

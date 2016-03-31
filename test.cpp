@@ -2,7 +2,7 @@
 #include <gmock/gmock.h>
 
 #include "impl/random/uniform_random_test.h"
-
+#include "util/zip_test.h"
 
 int main(int argc, char** argv)
 {
