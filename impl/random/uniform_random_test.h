@@ -10,7 +10,7 @@ typedef ::testing::Types<
   , rnd::UniformRandomSpinLock
   , rnd::UniformRandomLockFree
   , rnd::UniformRandomForkable<rnd::FORKED_VERSION_STEP>
-> UniformRandomTypes;
+> UniformRandomTypeList;
 
 
 template <typename UniformRandom>
@@ -27,7 +27,7 @@ public:
 };
 
 
-TYPED_TEST_CASE(UniformRandomTest, UniformRandomTypes);
+TYPED_TEST_CASE(UniformRandomTest, UniformRandomTypeList);
 
 
 TYPED_TEST(UniformRandomTest, CheckConsecutiveCalls)
