@@ -4,6 +4,7 @@
 #include <boost/hana.hpp>
 
 #include "thread_mode.h"
+#include "util/traits.h"
 
 
 namespace hana = boost::hana;
@@ -37,7 +38,7 @@ namespace rnd
 
 
 #define IMPLEMENTS(ThreadMode, Impl) \
-  hana::make_pair(hana::type_c<ThreadMode>, hana::type_c<Impl>)
+  util::MakeHanaPair<ThreadMode, Impl>
 
 
 #define END_DECLARE_RANDOM_GENERATOR(RandomType) \

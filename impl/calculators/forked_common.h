@@ -63,7 +63,7 @@ namespace rnd
 
     auto GetRandomGenerators()
     {
-      // TODO: why I needed to specify return type explicitly?
+      // NOTICE: return type must be specified explicitly because lambdas remove references of return type by default
       return  boost::adaptors::transform(randomGenerators_, 
         [this](auto & paddedRandomGenerator) -> RandomGenerator & { return paddedRandomGenerator.Get(); });
     }

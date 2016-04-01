@@ -82,9 +82,9 @@ namespace thread_mode
             class ThreadedImpl = ThreadedFromSingle<SingleImpl>,
             class ForkedImpl = ForkedFromSingle<SingleImpl>>
   constexpr auto threadModeHelper = hana::make_map(
-      hana::make_pair(hana::type_c<SingleThreaded>, hana::type_c<SingleImpl>)
-    , hana::make_pair(hana::type_c<ThreadSafe>, hana::type_c<ThreadedImpl>)
-    , hana::make_pair(hana::type_c<Forkable>, hana::type_c<ForkedImpl>));
+      util::MakeHanaPair<SingleThreaded, SingleImpl>
+    , util::MakeHanaPair<ThreadSafe, ThreadedImpl>
+    , util::MakeHanaPair<Forkable, ForkedImpl>);
 
 
   template <int bits>
