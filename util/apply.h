@@ -21,6 +21,8 @@ namespace util
     }
   }
 
+
+  // TODO: rewrite using boost::hana::fuse
   template <class F, class Tuple>
   constexpr decltype(auto) Apply(F && f, Tuple && t)
   {

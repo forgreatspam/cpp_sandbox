@@ -95,8 +95,6 @@ namespace util
         //           }
         // Because of 'decay', reference is removed which breaks our logic.
 
-
-        // TODO: rewrite Apply using fuse
         return hana::fuse([](auto... iterators) {
           return ZipReferenceType<Containers...>(*iterators...); })(current_);
       }
