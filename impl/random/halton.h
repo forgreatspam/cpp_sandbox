@@ -41,13 +41,13 @@ namespace rnd
     double GetHalton(size_t num, size_t prime)
     {
       double const mul = 1.0 / (double)prime;
-      double alpha = 0;       
+      double alpha = 0;
       double mulPow = mul;
 
       while (num >= prime) {
         alpha += (num % prime) * mulPow;
         mulPow *= mul;
-        num /= prime;
+        num /= prime;  // TODO: use profiler here
       }
       alpha += num * mulPow;
 

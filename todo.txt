@@ -1,8 +1,10 @@
 * use automated documentation
 * try cmake, at least to compare with meson build
-* test agains gcc 6.0
-* compile to AsmJS
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform
 * separate output logic from the core algorithms
-* use code coverage during tests. See gcov
+* write normal readme.md
 
+Lesser priority:
+* make the async part of code compile in windows' clang
+* test agains gcc 6.0
+* compile to AsmJS

@@ -60,7 +60,7 @@ namespace util
         queue_.pop_back();
         lock.unlock();
 
-        func();
+        std::move(func)();
         lock.lock();
       }
     }

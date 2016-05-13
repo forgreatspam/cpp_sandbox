@@ -48,7 +48,7 @@ namespace rnd
 
 
     template <class... Args>
-    double operator()(Args && ... args)
+    double operator()(Args &&... args)
     {
       return MixRandom_(algorithm_(std::forward<Args>(args)...));
     }

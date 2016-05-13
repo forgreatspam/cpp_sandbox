@@ -1,3 +1,5 @@
+# TODO: move to 'random' folder
+
 #pragma once
 #include <type_traits>
 
@@ -52,7 +54,7 @@ namespace rnd
       : public GeneratorAdaptorType_<RandomType, RandomFunc> \
     { \
       template <class... Args> \
-      RandomGenerator(Args && ... args) : \
+      RandomGenerator(Args &&... args) : \
         GeneratorAdaptorType_<RandomType, RandomFunc>(std::forward<Args>(args)...) \
       {} \
     }; \

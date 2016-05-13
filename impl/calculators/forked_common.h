@@ -69,6 +69,8 @@ namespace rnd
     }
 
   private:
+    // The class is used in order to avoid false cache lines sharing
+    // TODO: move padded logic to utils
     class PaddedRandomGenerator
     {
     public:

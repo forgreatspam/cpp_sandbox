@@ -25,7 +25,7 @@ namespace thread_mode
   using GetThreadMode = typename std::decay_t<decltype(threadModes<Algorithm>[hana::type_c<Mode>])>::type;
 
 
-  // TODO: move to utils
+  // TODO: move to utils, leave only declaration here
   template <class T>
   class ThreadedFromSingle
   {

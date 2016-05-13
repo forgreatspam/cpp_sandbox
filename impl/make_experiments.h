@@ -24,11 +24,13 @@ namespace rnd
   namespace mpl = boost::mpl;
 
 
+  // TODO: move to the class below as private method or leave just this method without class
+  // TODO: rename Methods to RandomGenerator?
   template <class CalculatorIdentity, class Methods>
   void MakeExperimentsImpl(linear::Equation const & equation, Methods methods, size_t minRepeat, size_t maxRepeat,
     std::ostream & stream = std::cout)
   {
-    stream << "Calculator type: " << CalculatorName<CalculatorIdentity>::Get() << std::endl;
+    stream << "Calculator name: " << CalculatorName<CalculatorIdentity>::Get() << std::endl;
 
     stream << "Repeat ";
     bf::for_each(methods, [&stream](auto const & method) { stream << method << " "; });
@@ -42,7 +44,7 @@ namespace rnd
         return Calculator(equation, method);
       }));
 
-    for (size_t repeat = minRepeat; repeat <= maxRepeat; repeat *= 2)
+    for (size_t repeat = minRepeat; repeat <= maxRepeat; repeat *= 2)  // TODO: remove hardcode, use 'generator'
     {
       stream << repeat << " ";
       bf::for_each(calculators, [repeat](auto & calculator) { calculator.Update(repeat - calculator.GetRepeat()); });
@@ -54,7 +56,7 @@ namespace rnd
     }
   }
 
-  class MakeExperiments
+  class MakeExperiments  // TODO: this class looks redundant, create Profiler class instead
   {
   public:
     MakeExperiments(linear::Equation && equation)
@@ -74,9 +76,9 @@ namespace rnd
       util::Timer timer;
 
       MakeExperimentsImpl<CalculatorIdentity>(
-        equation_, methods, settings::MIN_REPEAT, settings::MAX_REPEAT, stream);
+        equation_, methods, settings::MIN_REPEAT, settings::MAX_REPEAT, stream);  // TODO: do not pass settings and stream
 
-      stream << timer.GetTime() << "ms" << std::endl << std::endl;
+      stream << timer.GetTime() << "sec" << std::endl << std::endl;
     }
 
   private:

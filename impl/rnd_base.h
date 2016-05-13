@@ -76,6 +76,7 @@ namespace rnd
   };
 
 
+  // TODO: move definition or at least declaration on top
   template <class RandomFunc>
   decltype(auto) CreateGenerator(RandomFunc && randomFunc)
   {

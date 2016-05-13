@@ -53,7 +53,7 @@ namespace rnd
   {
     static std::string Get()
     {
-      return "forked using std::async";
+      return "forked using std::async"; // TODO: Looks too complex. Why not to use just member function of calculator?
     }
   };
 }

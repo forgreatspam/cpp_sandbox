@@ -23,7 +23,7 @@ namespace rnd
   template <class Algorithm, class... Args>
   struct Method
   {
-    Method(std::string name, Args && ... args)
+    Method(std::string name, Args &&... args)
       : name_(std::move(name))
       , args_(std::forward<Args>(args)...)
     {}
@@ -61,7 +61,7 @@ namespace rnd
   template <class Algorithm, class... Args>
   auto CreateMethod(std::string name, Args &&... args )
   {
-    return Method<Algorithm, Args...>(std::move(name), std::forward<Args>(args)... );
+    return Method<Algorithm, Args...>(std::move(name), std::forward<Args>(args)...);
   }
 
 

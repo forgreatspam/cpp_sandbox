@@ -11,19 +11,24 @@ namespace rnd
   template <class Method>
   class CalculatorSingleThreaded;
 
+
   template <class Method>
   class CalculatorForked;
+
 
   template <class Method>
   class CalculatorThreadPool;
 
-  template <template <class> class T>
+
+  template <template <class> class T>  // TODO: move to details
   using TemplateIdentity = mpl::identity<T<mpl::_1>>;;
+
 
   using CalculatorSingleThreadedId = TemplateIdentity<CalculatorSingleThreaded>;
   using CalculatorForkedId = TemplateIdentity<CalculatorForked>;
   using CalculatorThreadPoolId = TemplateIdentity<CalculatorThreadPool>;
 
+ 
   template <class CalculatorIdentity>
   struct CalculatorName;
 }

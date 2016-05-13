@@ -105,7 +105,7 @@ namespace util
   }
 
   template <class... Containers>
-  auto zip(Containers & ... containers)
+  auto zip(Containers &... containers)
   {
     // I do not use boost's make_zip_iterator, because it relies on boost tuple which is obsolette
 
