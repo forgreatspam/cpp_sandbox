@@ -2,7 +2,6 @@
 * try cmake, at least to compare with meson build
 * use noncopyable classes, currently it is impossible because of boost::fusion::transform
 * separate output logic from the core algorithms
-* write normal readme.md
 
 Lesser priority:
 * make the async part of code compile in windows' clang
